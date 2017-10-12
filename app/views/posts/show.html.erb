@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <strong>내용: </strong>
+  <%= @post.content %>
+</h1>
+
+<br><br>
+
+<h3><strong>댓글창</strong></h3>
+<div class="">
+  <ul id="comments" class="list-group">
+    <% @post.comments.each do |comment| %>
+    <h4><li><%= comment.content %></li></h4>
+    <% end %>
+  </ul>
+      <!-------------------------------------------------------------------------->
+    <!---------------------------- 댓글 작성하는 부분 -------------------------->
+    <!-------------------------------------------------------------------------->
+    <div class="list-group">  
+      <%= form_for [@post, @post.comments.new], remote: true do |f| %>
+        <div class="form-row align-items-center">
+          <div class="col-auto">
+            <%= f.text_area :content %>
+          </div>
+          <div class="col-auto">
+            <%= f.submit %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <!-------------------------------------------------------------------------->
+    <!------------------------------ 여기까지 ---------------------------------->
+    <!-------------------------------------------------------------------------->
+</div>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
